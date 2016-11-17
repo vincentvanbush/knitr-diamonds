@@ -1,0 +1,53 @@
+---
+title: "Diamenty"
+author: "Michał Buszkiewicz"
+date: "10 listopada 2016"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+```
+
+Krótkie podsumowanie danych:
+```{r}
+knitr::kable(summary(diamonds))
+```
+
+Histogram atrybutu "depth" (fill=cut):
+```{r}
+ggplot(diamonds, aes(depth, fill=cut)) +
+  geom_histogram(binwidth = 0.2) +
+  xlim(55, 70) 
+```
+
+Histogram atrybutu "depth" (panele na podstawie cut):
+```{r}
+ggplot(diamonds, aes(depth)) +
+  geom_histogram(binwidth = 0.2, color="black", fill = "cadetblue3") +
+  facet_grid(cut ~ .) +
+  xlim(55, 70) 
+```
+
+Histogram atrybutu "price":
+```{r}
+ggplot(diamonds, aes(price, fill=cut)) +
+  geom_histogram(bins = 20, color="black")
+```
+
+Histogram atrybutu "price" (panele dla cut)
+```{r}
+ggplot(diamonds, aes(price)) +
+  geom_histogram(color="black", fill = "cadetblue3") +
+  facet_grid(cut ~ .)
+```
+
+Relacja między zmiennymi "carat" i "price":
+```{r}
+ggplot(diamonds, aes(carat, price, color=clarity)) + geom_point()
+```
+
